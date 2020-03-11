@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { HashRouter as Router, Switch, Route} from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import CartItems from "./Components/CartItems/CartItems";
 import AddItems from "./Components/CartItems/AddItem";
-import TotalCounter from "./Components/CartItems/TotalCounter";
+import "./App.css";
 
 export default class App extends Component {
   constructor() {
@@ -45,10 +46,10 @@ export default class App extends Component {
     const { cartItemsList } = this.state;
 
     let productIndexToUpdate = cartItemsList.indexOf(
-      cartItemsList.find(i => i.product.id == newProduct.id)
+      cartItemsList.find(i => Number(i.product.id) === Number(newProduct.id))
     );
     if (productIndexToUpdate >= 0) {
-      cartItemsList[productIndexToUpdate].quantity += quantity;
+      cartItemsList[productIndexToUpdate].quantity += Number(quantity);
     } else {
       let nextFreeIndex = cartItemsList.reduce((a, v) =>
         a.id >= v.id ? a.id : v.id
@@ -56,7 +57,7 @@ export default class App extends Component {
       cartItemsList.push({
         id: nextFreeIndex,
         product: newProduct,
-        quantity: quantity
+        quantity: Number(quantity)
       });
     }
 
@@ -70,11 +71,21 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header />
-        <CartItems items={cartItemsList} />
-        <TotalCounter items={cartItemsList}/>
-        <AddItems addHandler={this.addProduct} /> 
+        <div id="content" className="container-fluid">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <CartItems items={cartItemsList} />
+            </Route>
+            <Route path="/additem">
+              <AddItems addHandler={this.addProduct} />
+            </Route>
+          </Switch>
+        </Router>
+        </div>
         <Footer date={2018} />
       </div>
     );
   }
 }
+

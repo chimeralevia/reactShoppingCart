@@ -1,5 +1,6 @@
 import React from "react";
 import CartItemSingle from "./CartItemSingle";
+import TotalCounter from "./TotalCounter";
 
 export default function CartItems(props) {
   return (
@@ -17,6 +18,7 @@ export default function CartItems(props) {
             return <CartItemSingle key={i} product={x.product} quantity={x.quantity}/>
         })}
       </div>
+      <TotalCounter items={props.items}/>
     </div>
   );
 }

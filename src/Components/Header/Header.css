@@ -1,0 +1,23 @@
+#navbar{
+    justify-content: flex-start;
+    position: sticky;
+    top:0;
+    left:0;
+    right:0;
+}
+
+a.navbar-brand{
+    margin-right:100px;
+}
+
+#navbar .nav-button:hover{
+    color:white;
+}
+
+
+
+#navbar .nav-button.MuiButtonBase-root{
+    color:white;
+    margin:0 20px ;
+}
+

@@ -26,7 +26,7 @@ export default class AddItem extends Component {
   };
 
   updateSelectedProduct = event => {
-    let pr = productList.find((p)=>p.id==event.target.value);
+    let pr = productList.find((p)=>Number(p.id)===Number(event.target.value));
 
     this.setState({ product: pr, isSelected: true });
   };
@@ -39,22 +39,23 @@ export default class AddItem extends Component {
   render() {
     return (
       <div className="container">
-          <div class="form-group">
+      <h1>Add Items</h1>
+          <div className="form-group">
             <label for="amountInput">Quantity</label>
 
             <input
               type="number"
               onChange={this.updateQuantity}
-              class="form-control"
+              className="form-control"
               id="amountInput"
               placeholder="amount"
             ></input>
           </div>
 
-          <div class="form-group">
+          <div className="form-group">
             <label for="productsSelection">Products</label>
             <select
-              class="form-control"
+              className="form-control"
               onChange={this.updateSelectedProduct}
               id="productsSelection"
             >
@@ -65,7 +66,7 @@ export default class AddItem extends Component {
               ))}
             </select>
           </div>
-          <button onClick={this.submitForm} class="btn btn-primary my-1">
+          <button onClick={this.submitForm} className="btn btn-primary my-1">
             Submit
           </button>
       </div>
